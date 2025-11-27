@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { QuantumExplainer } from "@/components/QuantumExplainer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+
+        {/* 全站共用 footer */}
+        <footer className="mt-12 border-t border-gray-200 bg-gray-50">
+          <div className="mx-auto max-w-5xl px-6 py-8">
+            <QuantumExplainer
+              compact
+              className="bg-gray-50 border-none shadow-none px-0 py-0"
+            />
+          </div>
+        </footer>
       </body>
     </html>
   );

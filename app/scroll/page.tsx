@@ -64,7 +64,7 @@ export default function HomePage() {
 
   return (
     <main className="w-full min-h-screen px-6 py-10 md:py-14">
-      <div className="mx-auto max-w-xl space-y-8">
+      <div className="mx-auto max-w-screen space-y-8">
         {/* 抽牌區塊 */}
         <section>
           <h1 className="text-2xl font-bold mb-4">抽塔羅牌（量子亂數）</h1>
@@ -114,39 +114,34 @@ export default function HomePage() {
           )} */}
 
           {drawn && (
-            <div className="mt-6 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-6 justify-items-center">
-              {/* <div className="mt-6 space-y-4 flex flex-wrap justify-around"> */}
-              {drawn.map((dc, index) => (
-                <div
-                  key={dc.card.id}
-                  className=" flex flex-col items-center text-center w-auto"
-                >
-                  {/* <div key={dc.card.id} className="flex flex-col text-center"> */}
-                  {/* ⭐ 圖片區 */}
-                  <img
-                    src={`/card-set/${dc.originalIndex}.png`}
-                    alt={dc.card.nameEn}
-                    className={`w-full h-40 mx-auto mb-2 h-40 object-contain ${
-                      dc.isReversed ? "rotate-180" : ""
-                    }`}
-                  />
-                  <div>
-                    {/* ⭐ 中文 / 英文牌名 */}
-                    <p className="font-semibold text-base">{dc.card.nameZh}</p>
-                    <p className="font-semibold text-xs">{dc.card.nameEn}</p>
+            // 外層：讓整排可以左右捲動
+            <div className="mt-6 ">
+              <div className="flex overflow-x-auto px-4 pb-3">
+                {drawn.map((dc, index) => (
+                  // 每一張卡：固定寬度 + 不被壓縮
+                  <div
+                    key={dc.card.id}
+                    className="flex flex-col items-center text-center w-24 sm:w-28 md:w-28 shrink-0"
+                  >
+                    {/* 圖片區：寬度吃卡寬，高度固定 */}
+                    <img
+                      src={`/card-set/${dc.originalIndex}.png`}
+                      alt={dc.card.nameEn}
+                      className={`w-full h-40 mb-2 object-contain ${
+                        dc.isReversed ? "rotate-180" : ""
+                      }`}
+                    />
 
-                    {/* ⭐ 正逆位 */}
-                    <p className="text-gray-500 text-sm">
-                      {dc.isReversed ? "逆位" : "正位"}
-                    </p>
+                    {/* 中文牌名：寬度 = 卡片寬度，太長就自動換行 */}
+                    <p className="font-semibold text-sm">{dc.card.nameZh}</p>
+
+                    {/* 抽出的順序編號 */}
+                    <span className="mt-1 text-xs text-gray-600">
+                      {index + 1}
+                    </span>
                   </div>
-
-                  {/* ⭐ 抽出的順序編號 */}
-                  <span className="mt-1 text-sm text-gray-600">
-                    {index + 1}
-                  </span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           )}
         </section>
