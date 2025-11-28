@@ -5,11 +5,13 @@ import { SAMPLE_CARDS } from "@/lib/tarot/cards-sample";
 import { createQuantumDeck, drawFromDeck } from "@/lib/tarot/quantumDeck";
 import type { DeckCard } from "@/lib/tarot/types";
 import { QuantumExplainer } from "@/components/QuantumExplainer";
+import { splitName } from "@/lib/tarot/splitName";
 
 export default function HomePage() {
   const [drawn, setDrawn] = useState<DeckCard[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState<number>(1); // ⭐ 使用者想抽幾張
+  // const [question, setQuestion] = useState(""); // ⭐ 使用者輸入的問題（表單用）
   const lastDrawTimeRef = useRef<number | null>(null);
 
   const handleDraw = async () => {
@@ -68,7 +70,19 @@ export default function HomePage() {
         {/* 抽牌區塊 */}
         <section>
           <h1 className="text-2xl font-bold mb-4">抽塔羅牌（量子亂數）</h1>
-
+          {/* 使用者輸入問題（選填） */}
+          <div className="mb-3">
+            <label className="block text-sm text-gray-700 mb-1">
+              你想問的問題（選填）
+            </label>
+            <input
+              type="text"
+              // value={question}
+              // onChange={(e) => setQuestion(e.target.value)}
+              placeholder="例：這份工作適不適合我？"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black/60"
+            />
+          </div>
           {/* 抽幾張的輸入欄位 */}
           <div className="mb-4 flex items-center gap-3">
             <label className="text-sm text-gray-700">想抽幾張？</label>
@@ -87,7 +101,6 @@ export default function HomePage() {
               <span className="text-red-500 text-xs">請輸入 1～31 的整數</span>
             )}
           </div>
-
           <button
             onClick={handleDraw}
             className="cursor-pointer bg-black text-white px-5 py-2 rounded-full text-sm disabled:opacity-60"
@@ -96,57 +109,73 @@ export default function HomePage() {
             {loading ? "洗牌中..." : "開始抽牌"}
           </button>
 
-          {/* {drawn && (
-            <div className="mt-6 space-y-4 flex justify-around">
-              {drawn.map((dc, index) => (
-                <div key={dc.card.id} className="flex flex-col text-center">
-                  <div className="border rounded-xl p-3">
-                    <p className="font-semibold text-lg">{dc.card.nameZh}</p>
-                    <p className="font-semibold text-lg">{dc.card.nameEn}</p>
-                    <p className="text-gray-500">
-                      {dc.isReversed ? "逆位" : "正位"}
-                    </p>
-                  </div>
-                  <span>{index + 1}</span>
+          {/* ⭐ 抽牌前（drawn === null）→ 顯示 placeholder */}
+          {drawn === null && (
+            <div className="mt-6 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-6 justify-items-center">
+              {Array.from({
+                length: Number.isNaN(count) ? 1 : Math.max(1, count),
+              }).map((_, i) => (
+                <div
+                  key={`placeholder-${i}`}
+                  className="flex flex-col items-center w-full h-40"
+                >
+                  <div
+                    // key={`placeholder-${i}`}
+                    className="w-full h-40 border border-gray-300 rounded-lg flex items-center text-gray-400 text-sm"
+                  ></div>
+                  <span className="mt-1 text-sm text-gray-600">{i + 1}</span>
                 </div>
               ))}
             </div>
-          )} */}
+          )}
 
-          {drawn && (
+          {/* ⭐ 抽牌後（drawn !== null && drawn.length > 0）→ 顯示卡片 */}
+          {drawn !== null && drawn.length > 0 && (
             <div className="mt-6 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-6 justify-items-center">
-              {/* <div className="mt-6 space-y-4 flex flex-wrap justify-around"> */}
-              {drawn.map((dc, index) => (
-                <div
-                  key={dc.card.id}
-                  className=" flex flex-col items-center text-center w-auto"
-                >
-                  {/* <div key={dc.card.id} className="flex flex-col text-center"> */}
-                  {/* ⭐ 圖片區 */}
-                  <img
-                    src={`/card-set/${dc.originalIndex}.png`}
-                    alt={dc.card.nameEn}
-                    className={`w-full h-40 mx-auto mb-2 h-40 object-contain ${
-                      dc.isReversed ? "rotate-180" : ""
-                    }`}
-                  />
-                  <div>
-                    {/* ⭐ 中文 / 英文牌名 */}
-                    <p className="font-semibold text-base">{dc.card.nameZh}</p>
-                    <p className="font-semibold text-xs">{dc.card.nameEn}</p>
+              {drawn.map((dc, index) => {
+                const { line1, line2 } = splitName(dc.card.nameEn);
 
-                    {/* ⭐ 正逆位 */}
-                    <p className="text-gray-500 text-sm">
-                      {dc.isReversed ? "逆位" : "正位"}
-                    </p>
+                return (
+                  <div
+                    key={dc.card.id}
+                    className="flex flex-col items-center text-center w-auto"
+                  >
+                    <img
+                      src={`/card-set/${dc.originalIndex}.png`}
+                      alt={dc.card.nameEn}
+                      className={`w-full h-40 mx-auto mb-2 object-contain ${
+                        dc.isReversed ? "rotate-180" : ""
+                      }`}
+                    />
+
+                    <div className="flex flex-col h-full justify-between">
+                      <div>
+                        {/* 中文名 */}
+                        <p className="font-semibold text-base">
+                          {dc.card.nameZh}
+                        </p>
+
+                        {/* 英文名（換成多行版本） */}
+                        <p className="font-semibold text-xs leading-tight">
+                          {line1}
+                          {line2 && <br />}
+                          {line2}
+                        </p>
+
+                        {/* 正逆位 */}
+                        <p className="text-gray-500 text-sm">
+                          {dc.isReversed ? "逆位" : "正位"}
+                        </p>
+                      </div>
+
+                      {/* ⭐ 抽出的順序編號 */}
+                      <span className="mt-1 text-sm text-gray-600">
+                        {index + 1}
+                      </span>
+                    </div>
                   </div>
-
-                  {/* ⭐ 抽出的順序編號 */}
-                  <span className="mt-1 text-sm text-gray-600">
-                    {index + 1}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </section>
