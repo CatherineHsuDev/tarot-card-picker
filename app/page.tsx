@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { SAMPLE_CARDS } from "@/lib/tarot/cards-sample";
 import { createQuantumDeck, drawFromDeck } from "@/lib/tarot/quantumDeck";
 import type { DeckCard } from "@/lib/tarot/types";
@@ -10,9 +10,36 @@ import { splitName } from "@/lib/tarot/splitName";
 export default function HomePage() {
   const [drawn, setDrawn] = useState<DeckCard[] | null>(null);
   const [loading, setLoading] = useState(false);
+  const [question, setQuestion] = useState("");
   const [count, setCount] = useState<number>(1); // ⭐ 使用者想抽幾張
-  // const [question, setQuestion] = useState(""); // ⭐ 使用者輸入的問題（表單用）
+  const [options, setOptions] = useState<string[]>([""]); // ⭐ dynamic options
   const lastDrawTimeRef = useRef<number | null>(null);
+
+  // ⭐ 當 count 改變時，自動調整 options 長度
+  useEffect(() => {
+    if (Number.isNaN(count)) return;
+
+    setOptions((prev) => {
+      const next = [...prev];
+
+      // 延長
+      while (next.length < count) next.push("");
+
+      // 縮短
+      if (next.length > count) next.length = count;
+
+      return next;
+    });
+  }, [count]);
+
+  // ⭐ 處理 options 單欄位變更
+  const handleOptionChange = (index: number, value: string) => {
+    setOptions((prev) => {
+      const next = [...prev];
+      next[index] = value;
+      return next;
+    });
+  };
 
   const handleDraw = async () => {
     const now = Date.now();
@@ -61,6 +88,7 @@ export default function HomePage() {
     setCount(next);
   };
 
+
   // 是否可以按按鈕：正在 loading 或 count 無效時不給按
   const isDrawDisabled = loading || Number.isNaN(count);
 
@@ -77,11 +105,25 @@ export default function HomePage() {
             </label>
             <input
               type="text"
-              // value={question}
-              // onChange={(e) => setQuestion(e.target.value)}
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
               placeholder="例：這份工作適不適合我？"
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black/60"
+              className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black/60"
             />
+
+            {/* ⭐ 清除全部按鈕 */}
+            <button
+              onClick={() => {
+                // ⭐ 清空所有資料
+                setQuestion("");
+                setCount(1);
+                setOptions([""]);
+                setDrawn(null);
+              }}
+              className="px-3 py-2 rounded-md border text-sm text-gray-700 hover:bg-gray-50"
+            >
+              清除全部
+            </button>
           </div>
           {/* 抽幾張的輸入欄位 */}
           <div className="mb-4 flex items-center gap-3">
@@ -124,6 +166,14 @@ export default function HomePage() {
                     className="w-full h-40 border border-gray-300 rounded-lg flex items-center text-gray-400 text-sm"
                   ></div>
                   <span className="mt-1 text-sm text-gray-600">{i + 1}</span>
+                  {/* 選項 input（動態對應 options[i]） */}
+                  <input
+                    type="text"
+                    placeholder="選項含意"
+                    value={options[i] ?? ""}
+                    onChange={(e) => handleOptionChange(i, e.target.value)}
+                    className="w-full rounded-md border border-gray-300 text-sm text-center focus:outline-none focus:ring-2 focus:ring-black/60"
+                  />
                 </div>
               ))}
             </div>
@@ -169,9 +219,15 @@ export default function HomePage() {
                       </div>
 
                       {/* ⭐ 抽出的順序編號 */}
-                      <span className="mt-1 text-sm text-gray-600">
-                        {index + 1}
-                      </span>
+                      {/* index + option */}
+                      <div className="flex flex-col">
+                        <span className="text-sm text-gray-600">
+                          {index + 1}
+                        </span>
+                        <span className="text-wrap text-sm text-gray-600">
+                          {options[index] ?? ""}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 );
