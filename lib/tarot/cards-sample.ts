@@ -59,37 +59,39 @@ export const TAROT_CARDS: TarotCard[] = [
   { id: "cups-queen", nameEn: "Queen of Cups", nameZh: "聖杯皇后" }, // 48
   { id: "cups-king", nameEn: "King of Cups", nameZh: "聖杯國王" }, // 49
 
-  // 50–63 錢幣（Pentacles）
-  { id: "pentacles-ace", nameEn: "Ace of Pentacles", nameZh: "錢幣王牌" }, // 50
-  { id: "pentacles-02", nameEn: "Two of Pentacles", nameZh: "錢幣二" }, // 51
-  { id: "pentacles-03", nameEn: "Three of Pentacles", nameZh: "錢幣三" }, // 52
-  { id: "pentacles-04", nameEn: "Four of Pentacles", nameZh: "錢幣四" }, // 53
-  { id: "pentacles-05", nameEn: "Five of Pentacles", nameZh: "錢幣五" }, // 54
-  { id: "pentacles-06", nameEn: "Six of Pentacles", nameZh: "錢幣六" }, // 55
-  { id: "pentacles-07", nameEn: "Seven of Pentacles", nameZh: "錢幣七" }, // 56
-  { id: "pentacles-08", nameEn: "Eight of Pentacles", nameZh: "錢幣八" }, // 57
-  { id: "pentacles-09", nameEn: "Nine of Pentacles", nameZh: "錢幣九" }, // 58
-  { id: "pentacles-10", nameEn: "Ten of Pentacles", nameZh: "錢幣十" }, // 59
-  { id: "pentacles-page", nameEn: "Page of Pentacles", nameZh: "錢幣侍者" }, // 60
-  { id: "pentacles-knight", nameEn: "Knight of Pentacles", nameZh: "錢幣騎士" }, // 61
-  { id: "pentacles-queen", nameEn: "Queen of Pentacles", nameZh: "錢幣皇后" }, // 62
-  { id: "pentacles-king", nameEn: "King of Pentacles", nameZh: "錢幣國王" }, // 63
 
-  // 64–77 寶劍（Swords）
-  { id: "swords-ace", nameEn: "Ace of Swords", nameZh: "寶劍王牌" }, // 64
-  { id: "swords-02", nameEn: "Two of Swords", nameZh: "寶劍二" }, // 65
-  { id: "swords-03", nameEn: "Three of Swords", nameZh: "寶劍三" }, // 66
-  { id: "swords-04", nameEn: "Four of Swords", nameZh: "寶劍四" }, // 67
-  { id: "swords-05", nameEn: "Five of Swords", nameZh: "寶劍五" }, // 68
-  { id: "swords-06", nameEn: "Six of Swords", nameZh: "寶劍六" }, // 69
-  { id: "swords-07", nameEn: "Seven of Swords", nameZh: "寶劍七" }, // 70
-  { id: "swords-08", nameEn: "Eight of Swords", nameZh: "寶劍八" }, // 71
-  { id: "swords-09", nameEn: "Nine of Swords", nameZh: "寶劍九" }, // 72
-  { id: "swords-10", nameEn: "Ten of Swords", nameZh: "寶劍十" }, // 73
-  { id: "swords-page", nameEn: "Page of Swords", nameZh: "寶劍侍者" }, // 74
-  { id: "swords-knight", nameEn: "Knight of Swords", nameZh: "寶劍騎士" }, // 75
-  { id: "swords-queen", nameEn: "Queen of Swords", nameZh: "寶劍皇后" }, // 76
-  { id: "swords-king", nameEn: "King of Swords", nameZh: "寶劍國王" }, // 77
+  // 50-63 寶劍（Swords）
+  { id: "swords-ace", nameEn: "Ace of Swords", nameZh: "寶劍王牌" }, // 50
+  { id: "swords-02", nameEn: "Two of Swords", nameZh: "寶劍二" }, // 51
+  { id: "swords-03", nameEn: "Three of Swords", nameZh: "寶劍三" }, // 52
+  { id: "swords-04", nameEn: "Four of Swords", nameZh: "寶劍四" }, // 53
+  { id: "swords-05", nameEn: "Five of Swords", nameZh: "寶劍五" }, // 54
+  { id: "swords-06", nameEn: "Six of Swords", nameZh: "寶劍六" }, // 55
+  { id: "swords-07", nameEn: "Seven of Swords", nameZh: "寶劍七" }, // 56
+  { id: "swords-08", nameEn: "Eight of Swords", nameZh: "寶劍八" }, // 57
+  { id: "swords-09", nameEn: "Nine of Swords", nameZh: "寶劍九" }, // 58
+  { id: "swords-10", nameEn: "Ten of Swords", nameZh: "寶劍十" }, // 59
+  { id: "swords-page", nameEn: "Page of Swords", nameZh: "寶劍侍者" }, // 60
+  { id: "swords-knight", nameEn: "Knight of Swords", nameZh: "寶劍騎士" }, // 61
+  { id: "swords-queen", nameEn: "Queen of Swords", nameZh: "寶劍皇后" }, // 62
+  { id: "swords-king", nameEn: "King of Swords", nameZh: "寶劍國王" }, // 63
+
+    // 64-77 錢幣（Pentacles） 
+  { id: "pentacles-ace", nameEn: "Ace of Pentacles", nameZh: "錢幣王牌" }, // 64
+  { id: "pentacles-02", nameEn: "Two of Pentacles", nameZh: "錢幣二" }, // 65
+  { id: "pentacles-03", nameEn: "Three of Pentacles", nameZh: "錢幣三" }, // 66
+  { id: "pentacles-04", nameEn: "Four of Pentacles", nameZh: "錢幣四" }, // 67
+  { id: "pentacles-05", nameEn: "Five of Pentacles", nameZh: "錢幣五" }, // 68
+  { id: "pentacles-06", nameEn: "Six of Pentacles", nameZh: "錢幣六" }, // 69
+  { id: "pentacles-07", nameEn: "Seven of Pentacles", nameZh: "錢幣七" }, // 70
+  { id: "pentacles-08", nameEn: "Eight of Pentacles", nameZh: "錢幣八" }, // 71
+  { id: "pentacles-09", nameEn: "Nine of Pentacles", nameZh: "錢幣九" }, // 72
+  { id: "pentacles-10", nameEn: "Ten of Pentacles", nameZh: "錢幣十" }, // 73
+  { id: "pentacles-page", nameEn: "Page of Pentacles", nameZh: "錢幣侍者" }, // 74
+  { id: "pentacles-knight", nameEn: "Knight of Pentacles", nameZh: "錢幣騎士" }, // 75
+  { id: "pentacles-queen", nameEn: "Queen of Pentacles", nameZh: "錢幣皇后" }, // 76
+  { id: "pentacles-king", nameEn: "King of Pentacles", nameZh: "錢幣國王" }, // 77
+
 ];
 
 // 為了不改你既有的 import，保留 SAMPLE_CARDS 這個名稱
