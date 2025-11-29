@@ -1,0 +1,35 @@
+tarot-card-picker
+├── README.md
+├── app
+│   ├── api
+│   │   └── quantum
+│   │       └── route.ts
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── scroll
+│       └── page.tsx
+├── components
+│   ├── QuantumExplainer.tsx
+│   ├── QuestionControls.tsx
+│   ├── TarotGrid.tsx
+│   ├── page-old copy.tsx
+│   └── page-old.tsx
+├── eslint.config.mjs
+├── lib
+│   └── tarot
+│       ├── cards-sample.ts
+│       ├── quantumDeck.ts
+│       ├── splitName.ts
+│       └── types.ts
+├── next-env.d.ts
+├── next.config.ts
+├── note.txt
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public
+│   └── card-set
+├── tree.txt
+└── tsconfig.json

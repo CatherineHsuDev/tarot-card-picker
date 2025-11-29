@@ -1,7 +1,7 @@
 // app/api/quantum/route.ts
 import { NextResponse } from "next/server";
 
-const ANU_API_URL = "https://qrng.anu.edu.au/API/jsonI.php";
+const ANU_API_URL = process.env.ANU_API_URL!;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

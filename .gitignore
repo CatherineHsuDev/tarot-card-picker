@@ -42,3 +42,7 @@ next-env.d.ts
 
 # other
 note.txt
+components/page-old copy.tsx
+components/page-old.tsx
+components/QuestionControls.tsx
+components/TarotGrid.tsx
