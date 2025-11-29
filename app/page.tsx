@@ -210,7 +210,7 @@ export default function HomePage() {
               step={1}
               value={Number.isNaN(count) ? "" : count}
               onChange={(e) => handleCountChange(e.target.value)}
-              className="w-20 rounded-md border border-gray-300 px-2 py-1 text-sm text-center focus:outline-none focus:ring-2 focus:ring-black/60"
+              className="w-10 sm:w-20 rounded-md border border-gray-300 px-2 py-1 text-sm text-center focus:outline-none focus:ring-2 focus:ring-black/60"
             />
             <button
               onClick={handleMinusChange}
@@ -233,7 +233,11 @@ export default function HomePage() {
               />
             </button>
 
-            <span className="text-xs text-gray-500">最少 1 張，最多 31 張</span>
+            <span className="text-xs text-gray-500">
+              最少 1 張 <span className="hidden sm:inline">，</span>
+              <br className="block sm:hidden" />
+              最多 31 張
+            </span>
             {Number.isNaN(count) && (
               <span className="text-red-500 text-xs">請輸入 1～31 的整數</span>
             )}
