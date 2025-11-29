@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Tarot Card Auto Draw",
-  description: "An Tarot card app with true randomness",
+  description: "A Tarot card app with true randomness",
 };
 
 export default function RootLayout({
