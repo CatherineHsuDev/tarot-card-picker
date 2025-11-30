@@ -309,13 +309,12 @@ export default function HomePage() {
                   <span className="mt-1 text-xs text-gray-600">{i + 1}</span>
 
                   <div className="relative w-full mt-1">
-                    <Tag className="w-3 h-3 text-gray-400 absolute left-2 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="text"
-                      placeholder="Label / 標籤"
+                    <textarea
+                      rows={1}
+                      placeholder="Label"
                       value={options[i] ?? ""}
                       onChange={(e) => handleOptionChange(i, e.target.value)}
-                      className="w-full rounded-md border border-gray-300 text-xs text-center pl-5 pr-2 py-1 focus:outline-none focus:ring-2 focus:ring-black/60"
+                      className="w-full rounded-md border border-gray-300 text-xs text-center py-1 focus:outline-none focus:ring-2 focus:ring-black/60"
                     />
                   </div>
                 </div>
