@@ -309,7 +309,7 @@ export default function HomePage() {
                   <span className="mt-1 text-xs text-gray-600">{i + 1}</span>
 
                   <div className="relative w-full mt-1">
-                    <Tag className="w-3 h-3 text-gray-400 absolute left-2 top-1/2 -translate-y-1/2" />
+                    {/* <Tag className="w-3 h-3 text-gray-400 absolute left-2 top-1/2 -translate-y-1/2" /> */}
                     <input
                       type="text"
                       placeholder="Label / 標籤"
