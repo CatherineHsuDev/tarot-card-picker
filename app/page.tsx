@@ -28,6 +28,15 @@ function normalizeCount(raw: number): number {
   return next;
 }
 
+/** ⭐ 取得今天日期（YYYY-MM-DD） */
+function getTodayLabel(): string {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 export default function HomePage() {
   const [drawn, setDrawn] = useState<DeckCard[] | null>(null);
   const [loading, setLoading] = useState(false);
@@ -35,6 +44,7 @@ export default function HomePage() {
   const [count, setCount] = useState<number>(1); // ⭐ 使用者想抽幾張
   const [options, setOptions] = useState<string[]>([""]); // ⭐ dynamic options
   const [copySuccess, setCopySuccess] = useState(false);
+  const todayLabel = getTodayLabel(); // ⭐ 抽牌日期（今天）
 
   const lastDrawTimeRef = useRef<number | null>(null);
 
@@ -119,14 +129,15 @@ export default function HomePage() {
     if (!drawn) return;
 
     const lines = [
+      `抽牌日期：${todayLabel}`,
       question ? `問題：${question}` : "",
       ...drawn.map((dc, index) => {
         const opt = options[index] || "無";
         return `${opt}：${dc.card.nameZh} ${dc.isReversed ? "逆位" : "正位"}`;
       }),
-    ].join("\n");
+    ].filter(Boolean); // ⭐ 避免空行
 
-    await navigator.clipboard.writeText(lines);
+    await navigator.clipboard.writeText(lines.join("\n"));
     setCopySuccess(true);
     setTimeout(() => setCopySuccess(false), 1500);
   };
@@ -382,6 +393,8 @@ export default function HomePage() {
             </button>
 
             {/* <h5 className="mb-2 font-medium text-gray-800">一鍵複製</h5> */}
+
+            <p className="text-sm text-gray-600 mb-1">抽牌日期：{todayLabel}</p>
 
             {question && (
               <p className="text-sm text-gray-600 mb-1">問題：{question}</p>
