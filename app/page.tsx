@@ -367,7 +367,7 @@ export default function HomePage() {
                           {index + 1}
                         </span>
                         <span className="text-wrap text-sm text-gray-600">
-                          {options[index] || "無"}
+                          {options[index] || ""}
                         </span>
                       </div>
                     </div>
@@ -401,8 +401,9 @@ export default function HomePage() {
 
             {drawn.map((dc, index) => (
               <p key={dc.card.id} className="text-sm text-gray-600">
-                {options[index] || "無"}：{dc.card.nameZh}{" "}
-                {dc.isReversed ? "逆位" : "正位"}
+                {/* {options[index] || "無"}：{dc.card.nameZh}{" "} */}
+                {options[index] && "："}
+                {dc.card.nameZh} {dc.isReversed ? "逆位" : "正位"}
               </p>
             ))}
           </div>
