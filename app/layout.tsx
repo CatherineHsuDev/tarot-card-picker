@@ -25,6 +25,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href={`data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+    <circle cx='50' cy='50' r='50' fill='%23007ACC'/>
+    <text x='50%' y='55%' text-anchor='middle'
+      font-size='60' fill='white'
+      font-family='Arial' dominant-baseline='middle'>
+      R
+    </text>
+  </svg>`}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
