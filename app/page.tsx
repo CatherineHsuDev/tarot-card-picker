@@ -132,7 +132,7 @@ export default function HomePage() {
       `抽牌日期：${todayLabel}`,
       question ? `問題：${question}` : "",
       ...drawn.map((dc, index) => {
-        const opt = options[index] || "無";
+        const opt = options[index] || "";
         return `${opt}：${dc.card.nameZh} ${dc.isReversed ? "逆位" : "正位"}`;
       }),
     ].filter(Boolean); // ⭐ 避免空行
@@ -403,8 +403,7 @@ export default function HomePage() {
               <p key={dc.card.id} className="text-sm text-gray-600">
                 {/* {options[index] || "無"}：{dc.card.nameZh}{" "} */}
                 {options[index] && `${options[index]} : `}
-                {dc.card.nameZh}{" "}
-                {dc.isReversed ? "逆位" : "正位"}
+                {dc.card.nameZh} {dc.isReversed ? "逆位" : "正位"}
               </p>
             ))}
           </div>
