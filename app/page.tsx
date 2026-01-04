@@ -133,7 +133,8 @@ export default function HomePage() {
       question ? `問題：${question}` : "",
       ...drawn.map((dc, index) => {
         const opt = options[index] || "";
-        return `${opt}：${dc.card.nameZh} ${dc.isReversed ? "逆位" : "正位"}`;
+        const prefix = opt ? `${opt}：` : "";
+        return `${prefix}${dc.card.nameZh} ${dc.isReversed ? "逆位" : "正位"}`;
       }),
     ].filter(Boolean); // ⭐ 避免空行
 
